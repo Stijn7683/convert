@@ -6,7 +6,7 @@ class textToPdfHandler implements FormatHandler {
   public name = "text-to-pdf";
   public supportedFormats?: FileFormat[] = [
       CommonFormats.TEXT.builder("text").allowFrom(true).allowTo(false),
-      CommonFormats.PDF.builder("pdf").allowFrom(false).allowTo(true).markLossless(),
+      CommonFormats.PDF.builder("pdf").allowFrom(false).allowTo(true),
   ];
   public ready = false;
 
