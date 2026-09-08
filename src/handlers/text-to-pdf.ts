@@ -22,16 +22,8 @@ class textToPdfHandler implements FormatHandler {
     const outputFiles: FileData[] = [];
 
     for (const file of inputFiles) {
-      const rawText = new TextDecoder().decode(file.bytes);
-      const hasLetters = /\p{L}/u.test(rawText);
-      const hasEmojis = /\p{Emoji}/u.test(rawText);
-      if (hasEmojis && !hasLetters) {
-        throw `Input file "${file.name}" does not contain any letters, only emojis.`;
-      }
-      let text = rawText;
-      if (hasEmojis) {
-        text = rawText.replace(/\p{Emoji}/gu, " "); // Remove emojis
-      }
+      const text = new TextDecoder().decode(file.bytes)
+        .replace(/\p{Extended_Pictographic}/gu, ""); // Remove emojis
 
       const doc = new PDFDocument({
         size: "A4",
